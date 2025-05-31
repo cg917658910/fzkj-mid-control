@@ -1,10 +1,11 @@
 <?php
 $env_config =  [
     'database' => [
-        'host' => '192.168.0.89',
+        //'host' => '192.168.0.89',
+        'host' => '127.0.0.1',
         'database' => 'newcontrol',
-        'name' => 'chenguo',
-        'pass' => '123456',
+        'name' => 'root',
+        'pass' => 'cg123456',
         'port' => 3306,
         'prefix' => '',
     ],

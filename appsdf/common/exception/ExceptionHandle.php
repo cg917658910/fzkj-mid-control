@@ -6,6 +6,7 @@ use app\common\enum\CodeEnum;
 use Exception;
 use think\exception\Handle;
 use think\exception\HttpException;
+use think\exception\RouteNotFoundException;
 use think\exception\ValidateException;
 
 class ExceptionHandle extends Handle
@@ -13,6 +14,9 @@ class ExceptionHandle extends Handle
 
     public function render(Exception $e)
     {
+        if ($e instanceof RouteNotFoundException) {
+            return jsonFail(CodeEnum::Route_Not_Found, $e->getMessage());
+        }
         // 参数验证错误
         if ($e instanceof ValidateException) {
             return jsonFail(CodeEnum::INVALID_PARAMS, $e->getMessage());

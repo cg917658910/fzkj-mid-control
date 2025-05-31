@@ -33,5 +33,5 @@
     "{author}": "author",
     "{namespace}": "namespace_path"
   },
-  "overwrite": false
+  "overwrite": true
 }

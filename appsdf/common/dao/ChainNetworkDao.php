@@ -18,10 +18,10 @@ class ChainNetworkDao extends BaseDao
 
     protected function setModel()
     {
-        $this->model = new ChainNetworkModel();
+        $this->model = ChainNetworkModel::class;
     }
     protected function getModel(): BaseModel
     {
-        return $this->model;
+        return new $this->model;
     }
 }

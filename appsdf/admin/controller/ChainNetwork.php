@@ -11,8 +11,10 @@ class ChainNetwork extends BaseController
 
     use RequestTraits;
     protected $service;
+    protected $exceptPath = [''];
     public function __construct(ChainNetworkService $service)
     {
+        $this->initialize();
         $this->service = $service;
     }
 }

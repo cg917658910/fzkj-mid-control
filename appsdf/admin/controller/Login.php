@@ -3,9 +3,6 @@
 namespace app\admin\controller;
 
 use app\common\controller\NoLoginBaseController;
-use app\common\enum\CodeEnum;
-use app\common\exception\ApiException;
-use app\common\model\system\SystemAdminModel;
 use app\common\service\LoginService;
 use app\common\traits\ApiBaseTraits;
 use think\Request;

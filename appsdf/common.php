@@ -1,12 +1,34 @@
 <?php
 
+use app\common\enum\CodeEnum;
+
+function jsonSuccess($data = null, $msg = null, $code = CodeEnum::SUCCESS)
+{
+    return json([
+        'code' => $code,
+        'data' => $data,
+        'msg'  => $msg ?? CodeEnum::msg($code),
+    ]);
+}
+function jsonFail($code = null, $msg = null, $httpStatus = 200, $data = null)
+{
+    $response = [
+        'code' => $code,
+        'msg'  => $msg ?? CodeEnum::msg($code),
+    ];
+    if ($data) {
+        $response['data'] = $data;
+    }
+    return json($response, $httpStatus);
+}
 /**发送json数据流
  * @param $url
  * @param $post_data
  * @param bool $isStr
  * @return bool|string
  */
-function flow_json_post($url,$post_data,$isStr = false){
+function flow_json_post($url, $post_data, $isStr = false)
+{
     $data_string = $isStr ? $post_data : json_encode($post_data);
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
@@ -17,9 +39,13 @@ function flow_json_post($url,$post_data,$isStr = false){
     curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0); // 从证书中检查SSL加密算法是否存在
     curl_setopt($ch, CURLOPT_POST, 1);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+    curl_setopt(
+        $ch,
+        CURLOPT_HTTPHEADER,
+        array(
             'Content-Type: application/json;charset=utf-8',
-            'Content-Length: ' . strlen($data_string))
+            'Content-Length: ' . strlen($data_string)
+        )
     );
     curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
     $output = curl_exec($ch);
@@ -32,22 +58,23 @@ function to_get($url, $header = [])
 {
     $con = curl_init($url);
     curl_setopt($con, CURLOPT_HEADER, false);
-    curl_setopt($con, CURLOPT_RETURNTRANSFER,true);
+    curl_setopt($con, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($con, CURLOPT_TIMEOUT, 60);
     curl_setopt($con, CURLOPT_HTTPGET, true);
     curl_setopt($con, CURLOPT_FOLLOWLOCATION, true);
     curl_setopt($con, CURLOPT_SSL_VERIFYPEER, FALSE);
-    curl_setopt($con, CURLOPT_SSL_VERIFYHOST, FALSE);// POST数据
+    curl_setopt($con, CURLOPT_SSL_VERIFYHOST, FALSE); // POST数据
     $output = curl_exec($con);
     curl_close($con);
     return $output;
 }
 
 //金额分割
-function coin_split($str,$n=3){
-    $str_arr = explode('.',$str);
+function coin_split($str, $n = 3)
+{
+    $str_arr = explode('.', $str);
     $str = strrev($str_arr[0]);
     $data = str_split($str, $n);
     $str = implode(',', $data);
-    return strrev($str).(isset( $str_arr[1] )?'.'.$str_arr[1] : '');
+    return strrev($str) . (isset($str_arr[1]) ? '.' . $str_arr[1] : '');
 }

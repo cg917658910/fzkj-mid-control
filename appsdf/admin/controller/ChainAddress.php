@@ -11,8 +11,10 @@ class ChainAddress extends BaseController
 
     use RequestTraits;
     protected $service;
+    protected $exceptPath = [''];
     public function __construct(ChainAddressService $service)
     {
+        $this->initialize();
         $this->service = $service;
     }
 }

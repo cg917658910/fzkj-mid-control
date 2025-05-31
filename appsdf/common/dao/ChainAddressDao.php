@@ -10,7 +10,7 @@ use think\Model;
 class ChainAddressDao extends BaseDao
 {
     protected $model;
-    protected $search = [];
+    protected $search = ['network_id', 'address'];
     public function __construct()
     {
         $this->setModel();
@@ -18,10 +18,10 @@ class ChainAddressDao extends BaseDao
 
     protected function setModel()
     {
-        $this->model = new ChainAddressModel();
+        $this->model = ChainAddressModel::class;
     }
     protected function getModel(): BaseModel
     {
-        return $this->model;
+        return new $this->model;
     }
 }

@@ -17,12 +17,14 @@ trait ApiBaseTraits
         if (!class_exists($validatorClass)) return;
         if (!$scene) $scene = request()->action();
         $validator = new $validatorClass();
+        if (!$validator->hasScene($scene)) return;
         if (!$validator->scene($scene)->check(request()->param())) {
             throw new ValidateException($validator->getError());
         }
     }
     protected function validateRequestMask()
     {
+        return;
         $mask = request()->param("qz");
         if (!$mask) {
             throw new ApiException(CodeEnum::FORBIDDEN_INVALID_MASK, "qzm nil");

@@ -10,12 +10,11 @@
 // +----------------------------------------------------------------------
 
 // [ 应用入口文件 ]
-
 //设置头部信息
 header("X-Powered-By:Yii2.0");
 $index = 'admin';
-define('BIND_MODULE', $index);//绑定默认模块
-define('DEBUG_A', true);//开关调试
+define('BIND_MODULE', $index); //绑定默认模块
+define('DEBUG_A', true); //开关调试
 // [ 应用入口文件 ]
 require __DIR__ . '/../systemdf/Grid.php';
 // 定义应用目录

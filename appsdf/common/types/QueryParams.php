@@ -5,22 +5,25 @@ namespace app\common\types;
 class QueryParams
 {
     public $params = [];
-    public $limit = 0;
+    public $limit = null;
     public $field = "*";
     public $page = 0;
     public $order = "";
     private $maxLimit = 1000;
     public function __construct(array $params)
     {
-        $this->params = $params;
-        if (isset($this->params["page"])) {
-            $this->page = $this->params["page"];
+        if (isset($params["page"])) {
+            $this->page = $params["page"];
             unset($this->params["page"]);
         }
-        if (isset($this->params["limit"])) {
-            $this->setLimit($this->params["limit"]);
-            unset($this->params["limit"]);
+        if (isset($params["limit"])) {
+            $this->setLimit($params["limit"]);
+            unset($params["limit"]);
         }
+        if (!isset($params['is_del'])) {
+            $params['is_del'] = 0;
+        }
+        $this->params = $params;
     }
     public function getParams()
     {

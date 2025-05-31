@@ -18,10 +18,10 @@ class {name}Dao extends BaseDao
 
     protected function setModel()
     {
-        $this->model = new {name}Model();
+        $this->model = {name}Model::class;
     }
     protected function getModel(): BaseModel
     {
-        return $this->model;
+        return new $this->model;
     }
 }

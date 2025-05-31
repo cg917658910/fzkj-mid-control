@@ -11,8 +11,10 @@ class {name} extends BaseController
 
     use RequestTraits;
     protected $service;
+    protected $exceptPath = [''];
     public function __construct({name}Service $service)
     {
+        $this->initialize();
         $this->service = $service;
     }
 }

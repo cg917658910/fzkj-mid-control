@@ -7,6 +7,27 @@ use think\Model;
 
 class BaseModel extends Model
 {
+    protected $hidden = ['is_del'];
+    protected $readonly = ['created_at'];
+    protected $autoWriteTimestamp = 'datetime';
+    protected $createTime = 'created_at';
+    protected $updateTime = 'updated_at';
+    public function searchIsDelAttr($query, $value, $data)
+    {
+        if ($value !== null) $query->where("is_del", (int)$value);
+    }
+    public function searchStatusAttr($query, $value)
+    {
+        $ext = '=';
+        if (is_array($value) || (is_string($value) && strpos($value, ',') !== false)) $ext = 'in';
+        if ($value !== null)  $query->where('status', $ext, $value);
+    }
+    public function searchIdAttr($query, $value)
+    {
+        $ext = '=';
+        if (is_array($value) || (is_string($value) && strpos($value, ',') !== false)) $ext = 'in';
+        if ($value !== null)  $query->where('id', $ext, $value);
+    }
     public function withSearch($fields, $data = [])
     {
 

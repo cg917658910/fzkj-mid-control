@@ -8,9 +8,5 @@ class Agent extends BaseController
 {
 
 
-    public function find(int $id)
-    {
-        var_dump($this->admin_login);
-        echo "id=" . $id;
-    }
+    public function find(int $id) {}
 }

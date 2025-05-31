@@ -1,0 +1,37 @@
+{
+  "layers": {
+    "controller": {
+      "template": "templates/controller.tpl",
+      "output": "../appsdf/admin/controller",
+      "filename": "{name}.php"
+    },
+    "model": {
+      "template": "templates/model.tpl",
+      "output": "../appsdf/common/model",
+      "filename": "{name}Model.php"
+    },
+    "validate": {
+      "template": "templates/validate.tpl",
+      "output": "../appsdf/admin/validate",
+      "filename": "{name}Validate.php"
+    },
+    "service": {
+      "template": "templates/service.tpl",
+      "output": "../appsdf/common/service",
+      "filename": "{name}Service.php"
+    },
+    "dao": {
+      "template": "templates/dao.tpl",
+      "output": "../appsdf/common/dao",
+      "filename": "{name}Dao.php"
+    }
+  },
+  "replace_vars": {
+    "{name}": "PascalCase",
+    "{name_lower}": "lowercase",
+    "{date}": "date",
+    "{author}": "author",
+    "{namespace}": "namespace_path"
+  },
+  "overwrite": false
+}
